@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang=en>
+<head>
+
+<style>
+#wrapper{
+	100vh;
+}
+
+#catz{
+	position: relative;
+	width: 625px;
+	height: 625px;
+	border-style: solid;
+	border-color: black;
+	margin-left: auto;
+	margin-right:auto;
+}
+img{
+
+	position: absolute;
+	top:100;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	z-index:-1;
+	border-style:solid;
+	border-color: black;
+	}
+button{
+	
+	position: absolute;
+	z-index: 1;
+	right: 225px;
+	top: 550px;
+	width: 175px;
+	background-color: #25406b;
+	color: white;
+	font: Ariel;
+	font-size: 16px;
+	padding:10px 30px 10px 30px;
+	border-radius: 4px;
+	border: none;
+	box-shadow: none;
+	
+}
+
+
+</style>
+
+
+<title>Cat Randomizer</title>
+</head>
+
+<body>
+
+<div id="wrapper">
+
+<div id="catz">	
+<a><img src="images/burt1.jpg" id="catpic" >
+<button id='catBtn'>Get a New Cat</button> 
+</a>
+</div>
+
+</div>
+<script type="text/javascript">
+function addLoadEvent(func) {
+	var oldonload = window.onload;
+	if (typeof window.onload != 'function') {
+		window.onload = func;
+	} else {
+		window.onload = function() {
+			if (oldonload) {
+				oldonload();
+			}
+			func();
+		}
+	}
+	console.log("images loaded");
+}
+addLoadEvent(preloader);
+
+//picture links
+var images = ['images/anya1.jpg', 'images/anya2.jpg', 'images/anya3.jpg', 'images/anya5.jpg',
+ 			'images/anya6.jpg', 'images/burt1.jpg', 'images/burt2.jpg', 'images/burt3.jpg', 
+ 			'images/burt4.jpg', 'images/ralph1.jpg', 'images/ralph2.jpg', 'images/ralph3.jpg', 'images/ralph4.jpg',
+ 			'images/ralph5.jpg', 'images/ralph6.jpg', 'images/ralph7.jpg', 'images/daisey1.jpg', 'images/daisey2.jpg', 
+			'images/daisey3.jpg', 'images/daisey4.jpg', 'images/moose1.jpg', 'images/moose2.jpg', 'images/littlec.jpg'];
+
+		i = 1;
+
+    // preload
+    function preloader() {
+		if (document.getElementById) {
+		for (var j=images.length; j--;) {
+                var img = new Image();
+                img.src = images[j];
+            }
+	}
+}
+
+
+
+
+var slide = 0;
+var count;
+var randomCats;
+var i;
+var image;
+
+//display random pictures
+function shuffle(){
+	
+	console.log("shuffleCats: " + count);
+	i = Math.floor((Math.random() * 23) );
+	console.log("i = " + i);
+	image = document.getElementById('catpic');
+	image.src = images[i] 
+	console.log(image.src);
+	count++;
+	if (count>30){
+		clearInterval(randomCats);
+		count = 0;
+
+	}
+}	
+
+
+// Add event handler
+document.getElementById("catBtn").addEventListener("click", function(){
+	count = 0;
+	randomCats = setInterval(shuffle, 25);
+});
+
+
+
+
+
+
+        </script>
+
+</script>
+</body>
+</html>
